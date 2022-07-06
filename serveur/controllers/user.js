@@ -1,9 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const config = require("../config");
 
 const User = require("../models/User");
 
 exports.signup = (req, res, next) => {
+    console.log(req);
     if (!req.body.password || !req.body.email) {
         res.status(400).json({ error: "Utilisateur ou mot de passe requis" });
     }
@@ -13,6 +15,7 @@ exports.signup = (req, res, next) => {
                 email: req.body.email,
                 password: hash
             });
+            console.log(user);
             user.save()
                 .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
                 .catch(error => res.status(400).json({ error }));
@@ -33,7 +36,7 @@ exports.login = (req, res, next) => {
                         } else {
                             res.status(200).json({
                                 userId: user._id,
-                                token: jwt.sign({ userId: user._id }, "AHJVHROIHGU1564", { expiresIn: "24h" })
+                                token: jwt.sign({ userId: user._id }, config.jwtKey, { expiresIn: "24h" })
                             });
                         }
                     })

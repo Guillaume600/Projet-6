@@ -1,0 +1,10 @@
+Pour lancer mongo (première étape)
+
+Services barre démarrage windows
+
+Chercher Mongo
+Démarrer
+
+Lancer API
+
+Lancer front 

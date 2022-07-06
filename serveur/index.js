@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const userRoutes = require("./routes/user");
 const saucesRoutes = require("./routes/sauces");
+const path = require('path');
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 // Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/sauces", saucesRoutes);
+app.use('/images', express.static(path.join(__dirname, '../images')));
 
 app.listen(port, () => {
     mongoose.connect('mongodb://localhost/3000', function(err) {

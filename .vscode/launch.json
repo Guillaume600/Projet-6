@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "configurations": [
   {
-    "name": "serveur",
+    "name": "api",
     "request": "launch",
     "runtimeArgs": [
       "run-script",
@@ -16,7 +16,7 @@
     "type": "node"
   },
     {
-      "name": "ng serve",
+      "name": "front",
       "type": "pwa-chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
