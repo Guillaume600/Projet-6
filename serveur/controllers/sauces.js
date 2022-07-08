@@ -1,13 +1,5 @@
 const Sauces = require("../models/sauces");
 
-/*router.get("/", auth, sauceCtrl.getAllSauces);
-router.get("/:id", auth, sauceCtrl.getSauceById);
-router.post("/", auth, multer, sauceCtrl.createSauce);
-router.put("/:id", auth, sauceCtrl.updateSauce);
-router.delete("/:id", auth, sauceCtrl.deleteSauce);
-router.post("/:id/like", auth, sauceCtrl.likeSauce);
-*/
-
 exports.getAllSauces = (req, res, next) => {
     Sauces.find()
         .then(sauces => res.status(200).json(sauces))
@@ -20,6 +12,12 @@ exports.getSauceById = (req, res, next) => {
         .catch(error => res.status(404).json({ error }));
 };
 
+/**
+ * Permet de créer une sauce et de l'associer à un user id
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
@@ -35,10 +33,13 @@ exports.createSauce = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
+/**
+ * Permet de modifier une sauce à condition qu'elle ait été créée par le même ID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.updateSauce = (req, res, next) => {
-    /**
-     * objet sauce
-     */
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -56,6 +57,12 @@ exports.updateSauce = (req, res, next) => {
         });
 };
 
+/**
+ * Permet de supprimer une sauce à condition qu'elle ait été créée par le même ID
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.deleteSauce = (req, res, next) => {
     Sauces.deleteOne({ _id: req.params.id })
         .then(() => res.status(200).json({ message: "Sauce supprimée !" }))
@@ -64,8 +71,8 @@ exports.deleteSauce = (req, res, next) => {
 
 /**
  * Permet de liker ou disliker une sauce
- * @param {*} req la requête
- * @param {*} res la réponse
+ * @param {JSON} req la requête
+ * @param {JSON} res la réponse
  * @param {*} next 
  */
 exports.likeSauce = (req, res, next) => {
