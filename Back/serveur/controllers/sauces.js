@@ -48,7 +48,16 @@ exports.updateSauce = (req, res, next) => {
 
     delete sauceObject._userId;
     Sauces.findOne({ _id: req.params.id })
-        .then(() => {
+        .then((sauce) => {
+            //si fichier modifié
+            if (req.file) {
+                const sauceImageUrl = sauce.imageUrl.split("/").pop();
+                fs.rm(`./images/${sauceImageUrl}`, (error) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
+            }
             Sauces.updateOne({ _id: req.params.id }, {...sauceObject, _id: req.params.id })
                 .then(() => res.status(200).json({ message: 'Sauce modifiée !' }))
                 .catch(error => res.status(401).json({ error }));
