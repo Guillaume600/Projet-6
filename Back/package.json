@@ -2,7 +2,7 @@
     "name": "hot-takes",
     "version": "0.0.0",
     "scripts": {
-        "start": "node serveur\\index.js"
+        "start": "node index.js"
     },
     "private": true,
     "dependencies": {
