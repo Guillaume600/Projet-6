@@ -30,7 +30,7 @@ app.use(limiter);
 // Routes
 app.use("/api/auth", userRoutes);
 app.use("/api/sauces", saucesRoutes);
-app.use('/images', express.static(path.join(__dirname, '../images')));
+app.use('/images', express.static(path.join(__dirname, './images')));
 
 app.listen(process.env.PORT, () => {
     mongoose.connect(`mongodb+srv://guillaumes:${process.env.MONGO_PASS}@cluster0.hvjeb3q.mongodb.net/?retryWrites=true&w=majority`, function(err) {
