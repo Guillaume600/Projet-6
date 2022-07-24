@@ -33,7 +33,7 @@ app.use("/api/sauces", saucesRoutes);
 app.use('/images', express.static(path.join(__dirname, './images')));
 
 app.listen(process.env.PORT, () => {
-    mongoose.connect('mongodb://127.0.0.1/hottakes', function(err) {
+    mongoose.connect('mongodb+srv://guillaumes:projet7@cluster0.hvjeb3q.mongodb.net/?retryWrites=true&w=majority', function(err) {
         if (err) { throw err; }
         console.log(`Serveur lancé sur le ${process.env.PORT} et connecté à la base de données`);
     });
