@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 //const config = require("../config");
 
 
-const User = require("../models/User");
+const User = require("../models/user");
 
 exports.signup = (req, res, next) => {
     console.log(req);
